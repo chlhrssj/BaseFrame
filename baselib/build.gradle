@@ -1,0 +1,35 @@
+apply from: "${rootProject.rootDir}/config.gradle"
+apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
+
+android {
+
+    project.ext.setDefaultConfig project
+    defaultConfig {
+        ndk {
+            // 设置支持的SO库架构(cpu)
+            abiFilters 'armeabi-v7a', 'x86'
+        }
+    }
+
+    buildTypes {
+        release {
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    api "androidx.appcompat:appcompat:$rootProject.androidx_version"
+    api "androidx.constraintlayout:constraintlayout:$rootProject.constraintlayout_version"
+    api 'com.google.android.material:material:1.2.0-alpha05'
+
+    api "androidx.multidex:multidex:$rootProject.multidex_version"
+}
