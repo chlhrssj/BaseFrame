@@ -5,22 +5,11 @@ apply plugin: 'com.jakewharton.butterknife'
 android {
 
     project.ext.setDefaultConfig project
-    defaultConfig {
-        ndk {
-            // 设置支持的SO库架构(cpu)
-            abiFilters 'armeabi-v7a', 'x86'
-        }
-    }
 
     buildTypes {
         release {
             consumerProguardFiles 'proguard-rules.pro'
         }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
     }
 
 }
@@ -32,4 +21,29 @@ dependencies {
     api 'com.google.android.material:material:1.2.0-alpha05'
 
     api "androidx.multidex:multidex:$rootProject.multidex_version"
+
+    //控件注入
+    api "com.jakewharton:butterknife:$rootProject.butterknife_version"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterknife_version"
+
+    //gson数据解析
+    api "com.google.code.gson:gson:$rootProject.gson_version"
+
+    //网络
+    api "com.squareup.retrofit2:retrofit:$rootProject.retrofit_version"
+    api "com.squareup.retrofit2:converter-gson:$rootProject.retrofit_version"
+    api "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofit_version"
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    api 'io.reactivex.rxjava2:rxjava:2.2.12'
+    api 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+
+    //内存泄漏监控
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$rootProject.leakcanary_version"
+
+    //eventbus
+    api "org.greenrobot:eventbus:$rootProject.eventbus_version"
+
+
+
+
 }
