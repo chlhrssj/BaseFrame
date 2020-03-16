@@ -182,3 +182,22 @@
 ## OkHttp platform used only on JVM and when Conscrypt dependency is available.
 #-dontwarn okhttp3.internal.platform.ConscryptPlatform
 ##----- okhttp -------
+
+##------ RxJava -------
+#By default, RxJava itself doesn't require any ProGuard/R8 settings and should work without problems.
+#Unfortunately, the Reactive Streams dependency since version 1.0.3 has embedded Java 9 class
+#files in its JAR that can cause warnings with the plain ProGuard:
+-dontwarn java.util.concurrent.Flow*
+##------ RxJava -------
+
+##------ Glide --------
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public class * extends com.bumptech.glide.module.AppGlideModule
+-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+
+# for DexGuard only
+-keepresourcexmlelements manifest/application/meta-data@value=GlideModule
+##------ Glide --------
